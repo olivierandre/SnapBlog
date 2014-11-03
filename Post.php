@@ -66,7 +66,7 @@
 		}
 
 		public function getDateCreated() {
-			return $this->dateCreated->format('Y-m-d H:i:s');
+			return $this->dateCreated;
 		}
 
 		public function setDateModified($dateModified) {
@@ -74,7 +74,18 @@
 		}
 
 		public function getDateModified() {
-			return $this->dateModified->format('Y-m-d H:i:s');
+			return $this->dateModified;
+		}
+
+		public function isValidToInsert() {
+			// Validation
+			$validator = new Validator();
+			$validator->validateEmail($this->getEmail(), 'email');
+
+			if($validator->isValid()) {
+				return true;
+			}
+			return false;
 		}
 
 	}

@@ -9,7 +9,8 @@
 		CONST DBNAME =  "snapblog_oo";
 
 		// Pour faire des liens vers la racine
-		CONST ROOT_URL = "http://localhost/snapblog/";
+		CONST ROOT_URL = "http://localhost/snapblog/index.php?method=";
+
 
 	}
 

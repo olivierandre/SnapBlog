@@ -1,4 +1,4 @@
-/*@import "reset.css";*/
+/*@import "reset.css";
 
 /*************************************************/
 /*
@@ -20,18 +20,28 @@ h1, h2, h3, h4, h5, h6, select, a, button {
 
 a {
 	text-decoration: none;
-	color: black;
 	cursor: pointer;
+	padding: 10px 30px;
+	border: 0;
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+	color: black;
 }
 
 input {
 	outline: none;
 }
 
-input[type=submit], button, a {
+input[type=submit], button {
 	text-transform: uppercase;
 	cursor: pointer;
 	outline: none;
+	padding: 10px 30px;
+	border: 0;
+	color: white;
 }
 
 .clearfix {
@@ -42,4 +52,20 @@ button {
 	padding: 10px 30px;
 	border: 0;
 	color: white;
+}
+
+.lienPost {
+	transition: background-color .3s;
+}
+
+.lienPost:hover {
+	background-color: rgb(46, 204, 113);
+}
+
+.boutonAccueil {
+	clear: both;
+	margin-top: 20px;
+	background-color: rgb(243, 156, 18);
+	display: block;
+	text-align: center;
 }

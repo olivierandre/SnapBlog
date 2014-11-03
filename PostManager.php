@@ -7,14 +7,14 @@
 			$database  = Database::connectDatabase();
 
 			$sql = "INSERT INTO post (title, content, username, email, published, dateCreated, dateModified)
-					VALUES(:title, :content, :username, :email, :published, NOW(), NOW())";
+					VALUES(:title, :content, :username, :email, 1, NOW(), NOW())";
 
 			$stmt = $database->prepare($sql);
 			$stmt->bindValue(':title', $post->getTitle());
 			$stmt->bindValue(':content', $post->getContent());
 			$stmt->bindValue(':username', $post->getUsername());
 			$stmt->bindValue(':email', $post->getEmail());
-			$stmt->bindValue(':published', $post->getPublished());
+			//$stmt->bindValue(':published', $post->getPublished());
 
 			return $stmt->execute();
 
@@ -58,6 +58,21 @@
 			$posts = $stmt->fetchAll(PDO::FETCH_CLASS, 'Post');
 
 			return $posts;
+		}
+
+		public function findPostById($id) {
+			$database = Database::connectDatabase();
+
+			$sql = "SELECT * FROM post
+					WHERE id = :id"; 
+
+			$stmt = $database->prepare($sql);
+			$stmt->bindValue(':id', $id);
+			/*$stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');*/
+			$stmt->execute();
+			$post = $stmt->fetchObject('Post');
+
+			return $post;
 		}
 
 		public function update(Post $post) {

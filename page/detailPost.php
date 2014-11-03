@@ -16,21 +16,21 @@
 	<body>
 
 	<div class="container">
-		<h1>SnapBlog !</h1>
+		<h1><?= $post->getTitle() ?></h1>
 		<div class="row">
 
-			<?php 
-				foreach($posts as $post) : 
-					$title = $post->getTitle();
-			?>
 			<div class='col-lg-12'>
-				<h3><a class='lienPost' title="<?= $title ?>" href="index.php?method=showPost&id=<?= $post->getId() ?>"><?= $title ?></a></h3>
+				<h3>Le contenu => <?= $post->getContent() ?></h3>
+				<h3>L'auteur => <?= $post->getUsername() ?></h3>
+				<h3>Son email => <?= $post->getEmail() ?></h3>
+				<h3>La date de création du post => <?= DateTool::dateFr($post->getDateCreated()) ?></h3>
+				<h3>La date de dernière MAJ => <?= DateTool::dateFr($post->getDateModified()) ?></h3>
 			</div>
-			<?php endforeach ?>
+
 		</div>
 	</div>
 
-	<a class="boutonAccueil" href="index.php?method=createPost">Création d'un post</a>
+	<a class="boutonAccueil" href="index.php?method=home">Retour accueil</a>
 	
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="js/js.js"></script>
