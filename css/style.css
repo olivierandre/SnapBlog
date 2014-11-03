@@ -1,0 +1,45 @@
+/*@import "reset.css";*/
+
+/*************************************************/
+/*
+/*
+/*					Général
+/*
+/*
+/**************************************************/
+h1, h2, h3, h4, h5, h6,
+span, input, p, a, button, label, select,
+figcaption, textarea, ul, li {
+	font-family: Raleway, Calibry;
+}
+
+h1, h2, h3, h4, h5, h6, select, a, button {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+input {
+	outline: none;
+}
+
+input[type=submit], button, a {
+	text-transform: uppercase;
+	cursor: pointer;
+	outline: none;
+}
+
+.clearfix {
+	clear: both;
+}
+
+button {	
+	padding: 10px 30px;
+	border: 0;
+	color: white;
+}
