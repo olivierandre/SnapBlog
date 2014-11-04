@@ -20,6 +20,7 @@
 		<div class="row">
 
 			<?php 
+
 				foreach($posts as $post) : 
 					$title = $post->getTitle();
 			?>

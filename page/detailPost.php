@@ -23,10 +23,52 @@
 				<h3>Le contenu => <?= $post->getContent() ?></h3>
 				<h3>L'auteur => <?= $post->getUsername() ?></h3>
 				<h3>Son email => <?= $post->getEmail() ?></h3>
-				<h3>La date de création du post => <?= DateTool::dateFr($post->getDateCreated()) ?></h3>
-				<h3>La date de dernière MAJ => <?= DateTool::dateFr($post->getDateModified()) ?></h3>
+				<h3>La date de création du post => <?= \Tool\DateTool::dateFrWithHour($timePost) ?></h3>
+			</div>
+			<div class="col-xs-3 finPost">
+				<p>Le blog disparaîtra dans <span class="time"><?= $fin ?></span></p>
 			</div>
 
+			<div class="clearfix"></div>
+
+			<button class="buttonAddComment">Ajouter un commentaire</button>
+			<form id="formCreatePost" role="form" method="POST">
+			  	<div class="form-group">
+				    <label for="username">Username du commentateur</label>
+					<input type="text" class="form-control" name="username" id="username" value="<?= $comment->getUsername() ?>" >
+				</div>
+				 <div class="form-group">
+				    <label for="email">Email du commentateur</label>
+					<input type="email" class="form-control" name="email" id="email" value="<?= $comment->getEmail() ?>">
+				</div>
+				<div class="form-group">
+					<label for="content">Contenu du commentaire</label>
+				    <textarea class="form-control" name="content" rows="3"><?= $comment->getContent() ?></textarea>
+				</div>
+				
+				  <button type="submit" class="buttonSubmitComment">Envoyer votre commentaire !!!!</button>
+			</form>
+
+			<button class="buttonAfficheComment">Afficher les commentaires</button>
+
+			<div id="showComment">
+
+				<?php 
+					$compteur = 1;
+					foreach($comments as $comment) :
+						if($compteur%2) {
+							$class = 'pair';
+						} else {
+							$class = 'impair';
+						}
+						$compteur += 1;
+				?>
+					<div class='col-lg-12 <?= $class ?>'>
+						<p>Commentaire de <?= $comment->getUsername() ?> (<?= $comment->getEmail() ?>), le <?= \Tool\DateTool::dateFr($comment->getDateCreated()) ?></p>
+						<p><?= $comment->GetContent() ?></p>
+					</div>
+				<?php endforeach ?>
+			</div>
 		</div>
 	</div>
 

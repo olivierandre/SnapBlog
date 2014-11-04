@@ -4,7 +4,10 @@
 		// index.php devient le contrôleur frontal
 
 		// autochargement de classe
-		spl_autoload_register();
+		spl_autoload_register(function($className){
+			$path = str_replace("\\", "/", $className);
+			require($path.".php");
+		});
 
 		$method = 'home';
 
@@ -12,10 +15,10 @@
 			$method = $_GET['method'];
 		}
 		
-		$controller = new MainController();
+		//$controller = new Controller\MainController();
 
 		// Appelle la méthode dans le controleur
 		//call_user_func(array($controller, $method));
-		call_user_func(array(new MainController(), $method));
+		call_user_func(array(new Controller\MainController(), $method));
 
 	?>

@@ -69,3 +69,43 @@ button {
 	display: block;
 	text-align: center;
 }
+
+.pair, .impair {
+	color: white;
+	margin-top: 10px;
+}
+
+.pair {
+	background-color: rgb(52, 73, 94);
+}
+
+.impair {
+	background-color: rgb(26, 188, 156);
+	margin-left: 20px;
+}
+
+.buttonAfficheComment {
+	margin-top: 20px;
+	background-color: rgb(243, 156, 18);
+}
+
+#showComment {
+	display: none;
+}
+
+.finPost {
+	margin: 20px 0;
+}	
+
+.buttonAddComment {
+	margin-bottom: 20px;
+	background-color: rgb(52, 152, 219)
+}
+
+.buttonSubmitComment {
+	background-color: rgb(46, 204, 113);
+}
+
+#formCreatePost {
+	display: none;
+}

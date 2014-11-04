@@ -2,7 +2,8 @@ app = {
 	init: function() {
 		_this = this;
 
-		//click.init();
+		click.init();
+		time.changeTime();
 	}
 }
 
@@ -11,6 +12,8 @@ click = {
 		_this = this;
 
 		//_this.buttonCreatePost();
+		_this.buttonAfficheComment();
+		_this.buttonAddComment();
 	},
 
 	buttonCreatePost: function() {
@@ -18,6 +21,51 @@ click = {
 			//ajax.createPost($(this));
 			//return false;
 		})
+	},
+
+	buttonAfficheComment: function() {
+		$(".buttonAfficheComment").on("click", function() {
+			comment.afficheComment();
+		})
+	},
+
+	buttonAddComment: function() {
+		$(".buttonAddComment").on("click", function() {
+			comment.afficheForm();
+		})
+	}
+}
+
+comment = {
+	afficheComment: function() {
+		$("#showComment").slideToggle();
+		$('html,body').animate({
+			scrollTop: $("#showComment").offset().top
+		}, 'slow');
+	},
+
+	afficheForm: function() {
+		$("#formCreatePost").slideToggle();
+		$('html,body').animate({
+			scrollTop: $("#formCreatePost").offset().top
+		}, 'slow');
+	}
+
+}
+
+time = {
+	changeTime: function() {
+		var time = $(".time").text();
+		time = time.split(" ")[0];
+		setInterval(function() {
+			time = time - 1;
+			$('.time').fadeOut({
+				complete: function() {
+					$('.time').empty().text(time + ' minutes')
+				}
+			}).fadeIn()  
+		}, 60000)
+		
 	}
 }
 
