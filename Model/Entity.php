@@ -16,7 +16,7 @@
      */
     public function getId()
     {
-        return $this->id;
+        return \Tool\SecurityTool::safeOnGet($this->id);
     }
 
 
@@ -27,7 +27,7 @@
      */
     public function getDateCreated()
     {
-        return $this->dateCreated;
+        return \Tool\SecurityTool::safeOnGet($this->dateCreated);
     }
 
     /**
@@ -39,7 +39,7 @@
      */
     public function setDateCreated($dateCreated)
     {
-        $this->dateCreated = $dateCreated;
+        $this->dateCreated = \Tool\SecurityTool::safeOnSet($dateCreated);
 
         return $this;
     }
@@ -51,7 +51,7 @@
      */
     public function getDateModified()
     {
-        return $this->dateModified;
+        return \Tool\SecurityTool::safeOnGet($this->dateModified);
     }
 
     /**
@@ -63,7 +63,7 @@
      */
     public function setDateModified($dateModified)
     {
-        $this->dateModified = $dateModified;
+        $this->dateModified = \Tool\SecurityTool::safeOnSet($dateModified);
 
         return $this;
     }

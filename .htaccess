@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?url=$1 [QSA]
+#RewriteRule ^(.*)\.html$ $1.php [QSA]
+#RewriteRule ^(.*)/(.*)$ $1.html?yo=$2 [QSA]

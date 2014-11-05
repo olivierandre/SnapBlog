@@ -18,8 +18,8 @@ click = {
 
 	buttonCreatePost: function() {
 		$("#formCreatePost").on("submit", function() {
-			//ajax.createPost($(this));
-			//return false;
+			/*ajax.createPost($(this));
+			return false;*/
 		})
 	},
 
@@ -45,9 +45,9 @@ comment = {
 	},
 
 	afficheForm: function() {
-		$("#formCreatePost").slideToggle();
+		$("#formCommentPost").slideToggle();
 		$('html,body').animate({
-			scrollTop: $("#formCreatePost").offset().top
+			scrollTop: $("#formCommentPost").offset().top
 		}, 'slow');
 	}
 
@@ -93,11 +93,7 @@ ajax = {
 						}
 					}).fadeIn();
 				}
-
-				//console.log(error);
 			}
-		
-
 		})
 	}
 }

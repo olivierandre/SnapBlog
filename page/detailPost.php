@@ -32,7 +32,7 @@
 			<div class="clearfix"></div>
 
 			<button class="buttonAddComment">Ajouter un commentaire</button>
-			<form id="formCreatePost" role="form" method="POST">
+			<form id="formCommentPost" role="form" method="POST">
 			  	<div class="form-group">
 				    <label for="username">Username du commentateur</label>
 					<input type="text" class="form-control" name="username" id="username" value="<?= $comment->getUsername() ?>" >

@@ -24,7 +24,7 @@
 	     */
 	    public function getId()
 	    {
-	        return $this->id;
+	        return \Tool\SecurityTool::safeOnGet($this->id);
 	    }
 
 	    /**
@@ -36,7 +36,7 @@
 	     */
 	    public function setId($id)
 	    {
-	        $this->id = $id;
+	        $this->id = \Tool\SecurityTool::safeOnSet($id);
 
 	        return $this;
 	    }
@@ -50,7 +50,7 @@
 	     */
 	    public function getContent()
 	    {
-	        return $this->content;
+	        return \Tool\SecurityTool::safeOnGet($this->content);
 	    }
 
 	    /**
@@ -62,7 +62,7 @@
 	     */
 	    public function setContent($content)
 	    {
-	        $this->content = $content;
+	        $this->content = \Tool\SecurityTool::safeOnSet($content);
 
 	        return $this;
 	    }
@@ -74,7 +74,7 @@
 	     */
 	    public function getUsername()
 	    {
-	        return $this->username;
+	        return \Tool\SecurityTool::safeOnGet($this->username);
 	    }
 
 	    /**
@@ -86,7 +86,7 @@
 	     */
 	    public function setUsername($username)
 	    {
-	        $this->username = $username;
+	        $this->username = \Tool\SecurityTool::safeOnSet($username);
 
 	        return $this;
 	    }
@@ -98,7 +98,7 @@
 	     */
 	    public function getEmail()
 	    {
-	        return $this->email;
+	        return \Tool\SecurityTool::safeOnGet($this->email);
 	    }
 
 	    /**
@@ -110,7 +110,7 @@
 	     */
 	    public function setEmail($email)
 	    {
-	        $this->email = $email;
+	        $this->email = \Tool\SecurityTool::safeOnSet($email);
 
 	        return $this;
 	    }
@@ -122,7 +122,7 @@
 	     */
 	    public function getPublished()
 	    {
-	        return $this->published;
+	        return \Tool\SecurityTool::safeOnGet($this->published);
 	    }
 
 	    /**
@@ -134,26 +134,9 @@
 	     */
 	    public function setPublished($published)
 	    {
-	        $this->published = $published;
+	        $this->published = \Tool\SecurityTool::safeOnSet($published);
 
 	        return $this;
-	    }
-
-
-	    public function isValidToInsert(){
-	        //validation ici
-	        $validator = new Validator();
-
-	        $validator->validateEmail( $this->getEmail(), "email" );
-	        $validator->validateMaxLength( $this->getEmail(), "email", 50 );
-
-	        $validator->validateMinLength( $this->getUsername(), "username" );
-	        $validator->validateMaxLength( $this->getUsername(), "username", 30 );
-
-	        if ($validator->isValid()){
-	            return true;
-	        }
-	        return $validator->getErrors();
 	    }
 
 	}

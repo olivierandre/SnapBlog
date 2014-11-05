@@ -12,7 +12,7 @@ class Comment extends TextualContent {
      * @return mixed
      */
     public function getPostId() {
-        return $this->postId;
+        return \Tool\SecurityTool::safeOnGet($this->postId);
     }
 
     /**
@@ -23,7 +23,7 @@ class Comment extends TextualContent {
      * @return self
      */
     public function setPostId($postId) {
-        $this->postId = $postId;
+        $this->postId = \Tool\SecurityTool::safeOnSet($postId);
 
         return $this;
     }

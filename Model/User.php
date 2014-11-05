@@ -130,4 +130,24 @@
         return $this;
     }
 
+    public static function setCookieUser($username, $email) {
+        setcookie("snapblog_username", $username, time() + 300, '/');
+        setcookie("snapblog_email", $email, time() + 300, '/');
+    }
+
+    public static function isCookieUserExist() {
+        if( empty($_COOKIE["snapblog_username"]) && empty($_COOKIE["snapblog_email"]) ) {
+            return false;
+        }
+        return true;
+    }
+
+    public static function getUsernameViaCookie() {
+        return $_COOKIE["snapblog_username"];
+    }
+
+    public static function getEmailViaCookie() {
+        return $_COOKIE["snapblog_email"];
+    }
+
 }

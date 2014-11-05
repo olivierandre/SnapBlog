@@ -1,0 +1,7 @@
+{
+    "require": {
+        "cocur/slugify": "~0.10",
+        "phpmailer/phpmailer": "~5.2"
+    }
+    
+}

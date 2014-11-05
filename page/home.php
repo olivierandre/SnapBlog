@@ -25,7 +25,7 @@
 					$title = $post->getTitle();
 			?>
 			<div class='col-lg-12'>
-				<h3><a class='lienPost' title="<?= $title ?>" href="index.php?method=showPost&id=<?= $post->getId() ?>"><?= $title ?></a></h3>
+				<h3><a class='lienPost' title="<?= $title ?>" href="index.php?method=showPost&slug=<?= $post->getSlug() ?>"><?= $title ?></a></h3>
 			</div>
 			<?php endforeach ?>
 		</div>

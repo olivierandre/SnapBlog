@@ -6,9 +6,10 @@
 	use \Model\CommentManager;
 	use \Model\Post;
 	use \Model\Comment;
-	use \Model\Validator;
+	use \Model\PostValidator;
+	use \Model\CommentValidator;
 	use \Config;
-
+	use \Model\User;
 
 	class MainController {
 
@@ -25,38 +26,45 @@
 
 		public function showPost() {
 			$postManager = new PostManager();
-			$idPost = $_GET['id'];
-			$post = $postManager->findPostById($idPost);
 			$comment = new Comment();
+			$commentValidator = new CommentValidator();
+
+			$slug = $_GET['slug'];
+			$post = $postManager->findPostBySlug($slug);
+			$idPost = $post->getId();
 			$timePost = $post->getDateCreated();
 			$delai = 'PT4H';
 			$fin = \Tool\DateTool::minutesLeft($timePost, $delai);
+
+			if(User::isCookieUserExist()) {
+				$comment->setUsername(User::getUsernameViaCookie());
+				$comment->setEmail(User::getEmailViaCookie());
+			}
 			
 			if(!empty($_POST)) {
+				
 				$comment->setPostId($idPost);
 				$comment->setUsername($_POST['username']);
 				$comment->setEmail($_POST['email']);
 				$comment->setContent($_POST['content']);
 
-				$validator = new Validator();
-				$validator->validateEmail($comment->getEmail(), 'email');
-
-				if($validator->isValid()) {
+				if($commentValidator->isValid($comment)) {
 					$commentManager = new CommentManager();
 
 					if($commentManager->save($comment)) {
-						header('Location: '.Config::ROOT_URL.'showPost&id='.$idPost);
-						die();
+						if(!User::isCookieUserExist()) {
+							User::setCookieUser($post->getUsername(), $post->getEmail());
+						}
+
+						$mail = new Mailer();
+						$send = $mail->sendThankYou($post->getUsername(), $post->getEmail(), 'comment');
+
+						header('Location: '.Config::ROOT_URL.'showPost&slug='.$slug);
 					} else {
 						$error = "Une erreur est intervenue";
-						header('Location: '.Config::ROOT_URL.'showPost&id='.$idPost);
-						die();
+						header('Location: '.Config::ROOT_URL.'showPost&slug='.$slug);
 					}
-				} else {
-					$error = "Une erreur est intervenue";
-					header('Location: '.Config::ROOT_URL.'showPost&id='.$idPost);
-					die();
-				}
+				} 
 		
 			}
 
@@ -67,35 +75,42 @@
 		}
 
 		public function createPost() {
-
 			$post = new Post();
+			$postValidator = new PostValidator();
+
+			if(User::isCookieUserExist()) {
+				$post->setUsername(User::getUsernameViaCookie());
+				$post->setEmail(User::getEmailViaCookie());
+			}
 
 			if(!empty($_POST)) {
-				$post->setTitle($_POST['title']);
+
+				$postManager = new PostManager();
+				$title = $_POST['title'];
+
+				$post->setTitle($title);
 				$post->setContent($_POST['content']);
 				$post->setUsername($_POST['username']);
 				$post->setEmail($_POST['email']);
+				$post->setSlug($title);
 
-				$validator = new Validator();
-				$validator->validateEmail($post->getEmail(), 'email');
-
-				if($validator->isValid()) {
-					$postManager = new PostManager();
-
+				if($postValidator->isValid($post)) {
+					
+					
 					if($postManager->save($post)) {
+
+						if(!User::isCookieUserExist()) {
+							User::setCookieUser($post->getUsername(), $post->getEmail());
+						}
+
+						$mail = new Mailer();
+						$send = $mail->sendThankYou($post->getUsername(), $post->getEmail(), 'post');
+						
 						header('Location: '.Config::ROOT_URL.'home');
-						die();
 					} else {
-						$error = "Une erreur est intervenue";
 						header('Location: '.Config::ROOT_URL.'createPost');
-						die();
 					}
-				} else {
-					$error = "Une erreur est intervenue";
-					header('Location: '.Config::ROOT_URL.'createPost');
-					die();
 				}
-		
 				
 			}
 

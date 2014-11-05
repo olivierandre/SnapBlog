@@ -18,31 +18,49 @@
 	<div class="container">
 		<h1>Création d'un post</h1>
 		<div class="row">
-			<h2 class='error'>
 			<?php
-				if(empty($error)) {
-					$error = '';
+
+				$errorTitle = '';
+				$errorContent = '';
+				$errorUsername = '';
+				$errorEmail = '';
+
+				$errors = $postValidator->getErrors();
+
+				if(!empty($errors['title'])) {
+					$errorTitle = $errors['title'][0];
 				}
-			?>
-			</h2>
-			
+				if(!empty($errors['content'])) {
+					$errorContent = $errors['content'][0];
+				}
+				if(!empty($errors['username'])) {
+					$errorUsername = $errors['username'][0];
+				}
+				if(!empty($errors['email'])) {
+					$errorEmail = $errors['email'][0];
+				}
+			?>		
 
 			<form id="formCreatePost" role="form" method="POST">
 			  	<div class="form-group">
 			    	<label for="title">Titre du post</label>
 			    	<input type="text" class="form-control" id="title" name="title" value="<?= $post->getTitle() ?>">
+			    	<p><?= $errorTitle ?></p>
 			  	</div>
 				<div class="form-group">
 					<label for="content">Contenu du post</label>
 				    <textarea class="form-control" name="content" rows="3"><?= $post->getContent() ?></textarea>
+				    <p><?= $errorContent ?></p>
 				</div>
 				<div class="form-group">
 				    <label for="username">Username de l'auteur</label>
 					<input type="text" class="form-control" name="username" id="username" value="<?= $post->getUsername() ?>" >
+					<p><?= $errorUsername ?></p>
 				</div>
 				 <div class="form-group">
 				    <label for="email">Email de l'auteur</label>
-					<input type="email" class="form-control" name="email" id="email" value="<?= $post->getEmail() ?>">
+					<input type="email" class="form-control" name="email" id="email" value="<?= $post->getEmail(); ?>">
+					<p><?= $errorEmail ?></p>
 				</div>
 				  <button type="submit" class="btn btn-success">Création du post</button>
 			</form>
